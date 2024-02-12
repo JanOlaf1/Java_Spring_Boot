@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-JanOlaf1BookStoreApplication<JanOlaf1_BookStore>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "JanOlaf1_BookStore.JanOlaf1_BookStore.JanOlaf1BookStoreApplication",
+      "projectName": "JanOlaf1_BookStore",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
