@@ -1,12 +1,16 @@
 package JanOlaf1_BookStore.JanOlaf1_BookStore.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Book {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     // attributes
     private String title;
     private String author;
@@ -16,7 +20,10 @@ public class Book {
     @Column(name = "publishing_year")
     private int year;
 
-    // konstruktorit
+    /*
+     * Konstruktorit
+     * constractors
+     */
     public Book() {
     }
 
@@ -32,6 +39,10 @@ public class Book {
     }
 
     // Setterit
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -53,6 +64,10 @@ public class Book {
     }
 
     // Getterit
+    public long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }

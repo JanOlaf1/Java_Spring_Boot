@@ -4,30 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookStore</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 
-<h2>Book List</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Author</th>
-            <th>Title</th>
-            <th>ISBN</th>
-            <th>Year</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.isbn}"></td>
-            <td th:text="${book.publicationYear}"></td>
-        
-            
-        </tr>
-    </tbody>
-</table>
-
+<div class="container"> <!-- Bootstrap container class -->
+    <h2>Book List</h2>
+    <table class="table table-striped"> <!-- Bootstrap table classes -->
+        <thead>
+            <tr>
+                <!-- Headers/Otsikot -->
+                <th>Author</th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Year</th>
+                <th>Toiminto</th> <!-- Lisätty sarakkeen otsikko -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Order of the output/ järjestys -->
+            <tr th:each="book : ${books}">
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.publicationYear}"></td>
+                <td>
+                    <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/add" class="btn btn-success">Add Book</a>
+</div>
 </body>
 </html>
