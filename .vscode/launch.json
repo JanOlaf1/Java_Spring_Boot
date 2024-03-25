@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-HaagaHeliaBookStoreApplication<Haaga-Helia_BookStore>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.example.HaagaHelia_BookStore.HaagaHeliaBookStoreApplication",
+      "projectName": "Haaga-Helia_BookStore",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
