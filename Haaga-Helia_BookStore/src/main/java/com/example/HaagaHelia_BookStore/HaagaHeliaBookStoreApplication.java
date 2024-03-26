@@ -28,12 +28,17 @@ public class HaagaHeliaBookStoreApplication {
 			UserRepository uRepository) {
 		return (args) -> {
 
+			Category category0 = new Category("");
+
 			Category category1 = new Category("Horror");
 			Category category2 = new Category("Comedy");
 			Category category3 = new Category("Drama");
 			Category category4 = new Category("Manga");
 			Category category5 = new Category("Sci-Fi");
 			Category category6 = new Category("Documentary");
+
+			cRepository.save(category0);
+
 			cRepository.save(category1);
 			cRepository.save(category2);
 			cRepository.save(category3);

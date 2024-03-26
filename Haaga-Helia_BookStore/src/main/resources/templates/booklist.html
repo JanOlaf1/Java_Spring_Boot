@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,12 @@
 
 <div class="container">
     <h1 class="mt-5 mb-4">Book List</h1>
+    <script th:if="${accessDenied}" th:inline="javascript">
+        function showAccessDeniedAlert() {
+            alert('You do not have permission to access this page.');
+        }
+    </script>
+    
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
     </form>
@@ -22,9 +28,7 @@
                 <th>Year</th>
                 <th>Price</th>
                 <th>Category</th>
-                <th>Action</th>
-                <th sec:authorize="hasAuthority('ADMIN')"> </th>
-
+                <th th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -36,16 +40,22 @@
                 <td th:text="${book.price}"></td>
                 <td th:text="${book.category?.name}"></td>
                 <td>
-                    <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
-                    <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a> 
+                    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+                    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a> 
                 </td>
             </tr>
         </tbody>
     </table>
-    <a href="/add" class="btn btn-success">Add Book</a>
-    <a href="/saveCategory" class="btn btn-success">Add Category</a>
-
-    
+    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" href="/add" class="btn btn-success">Add Book</a>
+    <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" href="/saveCategory" class="btn btn-success">Add Category</a>
+    <script th:if="${!#authorization.expression('hasAuthority(''ADMIN'')')}" th:inline="javascript">
+        document.querySelectorAll('.btn-danger, .btn-primary, .btn-success').forEach(function(button) {
+            button.onclick = function() {
+                showAccessDeniedAlert();
+                return false;
+            };
+        });
+    </script>
 </div>
 </body>
 </html>
